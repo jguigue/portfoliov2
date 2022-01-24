@@ -2706,8 +2706,8 @@ body.dark .loader_line:after {
 .julien_contact .wrapper .left ul li .list_inner .icon {
   display: inline-block;
   position: relative;
-  min-width: 80px;
-  height: 80px;
+  min-width: 60px;
+  height: 60px;
   border-radius: 100%;
   background-color: var(--secondary-color);
 }
@@ -2720,17 +2720,17 @@ body.dark .loader_line:after {
   color: var(--blanc);
 }
 .julien_contact .wrapper .left ul li .list_inner .short {
-  padding-left: 15px;
+  padding-left: 10px;
 }
 .julien_contact .wrapper .left ul li .list_inner .short h3 {
-  font-size: 21px;
+  font-size: 17px;
   font-weight: 700;
   margin-bottom: 11px;
 }
 .julien_contact .wrapper .left ul li .list_inner .short span a {
   text-decoration: none;
   color: #888;
-
+  font-size: 14px;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
   -ms-transition: all 0.3s ease;
@@ -4433,7 +4433,6 @@ input[type="number"] {
   .julien_contact .wrapper .left {
     width: 100%;
     padding-right: 0px;
-    font-size: 12px;
     margin-bottom: 40px;
   }
   .julien_contact .wrapper .right {
