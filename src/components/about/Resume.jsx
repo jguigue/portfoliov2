@@ -2,7 +2,6 @@ import React from "react";
 import Education from "./Education";
 import Experience from "./Experience";
 import PersonalSkills from "./PersonalSkills";
-import PersonalSkills2 from "./PersonalSkills2";
 
 const Resume = () => {
   return (
