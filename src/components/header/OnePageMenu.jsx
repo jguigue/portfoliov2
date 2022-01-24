@@ -1,0 +1,60 @@
+import React from "react";
+import Scrollspy from "react-scrollspy";
+
+// sidebar content
+const sidebarContent = [
+  {
+    icon: "icon-squares",
+    itemName: "Accueil",
+    itemRoute: "#home",
+    activeClass: "current",
+  },
+  {
+    icon: "icon-archive",
+    itemName: "À propos",
+    itemRoute: "#about",
+    activeClass: "",
+  },
+  {
+    icon: "icon-contacs",
+    itemName: "CV",
+    itemRoute: "#resume",
+    activeClass: "",
+  },
+  {
+    icon: "icon-briefcase",
+    itemName: "Portfolio",
+    itemRoute: "#portfolio",
+    activeClass: "",
+  },
+  {
+    icon: "icon-letter",
+    itemName: "Contact",
+    itemRoute: "#contact",
+    activeClass: "",
+  },
+];
+
+const OnePageMenu = () => {
+  return (
+    <>
+      <Scrollspy
+        className="anchor_nav"
+        items={["home", "about", "resume", "portfolio", "contact"]}
+        currentClassName="current"
+        offset={0}
+      >
+        {sidebarContent.map((val, i) => (
+          <li className={val.activeClass} key={i}>
+            <a className="julien_full_link" href={val.itemRoute}>
+              <div className={`svg ${val.icon}`}></div>
+              <span>{val.itemName}</span>
+            </a>
+          </li>
+        ))}
+      </Scrollspy>
+    </>
+  );
+};
+
+export default OnePageMenu;
