@@ -1394,8 +1394,8 @@ body.dark .loader_line:after {
 .julien_about .left .details {
   position: relative;
   overflow: hidden;
-  min-width: 47%;
-  left: -55px;
+  min-width: 20vw;
+  left: -80px;
   margin-top: 55px;
   background-color: var(--main-color);
   padding: 36px 39px 35px 40px;
@@ -4071,7 +4071,7 @@ input[type="number"] {
     font-size: 25px;
   }
   .julien_about .left .details {
-    min-width: 50%;
+    min-width: 20vw;
   }
   .progress_inner span.label {
     font-size: 19px;
@@ -4433,6 +4433,7 @@ input[type="number"] {
   .julien_contact .wrapper .left {
     width: 100%;
     padding-right: 0px;
+    font-size: 12px;
     margin-bottom: 40px;
   }
   .julien_contact .wrapper .right {

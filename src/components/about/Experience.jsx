@@ -17,7 +17,7 @@ const experienceContent = [
     position: "Technicien Prototype Aéronautique",
     compnayName: "Airbus Helicopters",
     year: "2016 - 2018",
-    details: ` Coordination chantiers hélicoptères, suivi et maintien de données chantiers,analyse de manquants chantiers.`,
+    details: ` Coordination chantiers hélicoptères, suivi et maintien de données chantiers, analyse de manquants chantiers.`,
   },
 ];
 

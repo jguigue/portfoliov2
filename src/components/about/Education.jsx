@@ -3,10 +3,10 @@ import React from "react";
 const educationContent = [
   {
     degree:
-      "M1 Ingémédia - IC parcours Communication, Innovation et Management de Projet",
+      "M1 Ingémédia - IC parcours Communication, Innovation et Management de Projets Numériques",
     institute: "UFR Ingémédia - Université de Toulon",
     year: "2021 - 2022",
-    details: `Fondamentaux du management et de la conduite de projet, processus de management collaboratifs, veille technologique, acquisition de connaissances et de compétences essentielles à l’élaboration de stratégies communicationnelles créatives dans des environnements numériques.`,
+    details: `Ce master vise à acquérir : fondamentaux du management et de la conduite de projet, processus de management collaboratif, veille technologique, acquisition de connaissances et de compétences essentielles à l’élaboration de stratégies communicationnelles créatives dans des environnements numériques.`,
   },
   {
     degree: "LP E-commerce et Marketing Numérique en Alternance",
@@ -18,7 +18,7 @@ const educationContent = [
     degree: "DUT Métiers du Multimédia et de l'Internet (MMI) en Alternance",
     institute: "IUT MMI - Université de Toulon",
     year: "2018 - 2020",
-    details: ` Le DUT MMI englobe la conception et le développement de sites Web, la création graphique et la gestion et l'animation de projets numériques pour la communication des entreprises et organisation.`,
+    details: ` Le DUT MMI englobe la conception et le développement de sites Web, la création graphique et la gestion et l'animation de projets numériques pour la communication des entreprises et organisations.`,
   },
   {
     degree: "BTS Aéronautique en Alternance",

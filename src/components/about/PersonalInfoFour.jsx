@@ -5,7 +5,7 @@ const personalDetails = [
   { title: "Date", info: "1er Juin 1997" },
   { title: "Email", info: "contact@guiguejulien.com" },
   { title: "Téléphone", info: "+336 77 51 05 37" },
-  { title: "Addresse", info: "Toulon" },
+  { title: "Adresse", info: "Toulon" },
   { title: "Nationalité", info: "Française" },
 ];
 
@@ -14,7 +14,7 @@ const aboutContentInfo = {
   title: "Étudiant rêvant de management numérique",
   subTitle:
     "Un ancien couteau suisse prêt à investir ses compétences dans le management",
-  description: `Je m’appelle Julien Guigue, étudiant de 23 ans en première année de Master Ingémédia, Information Communiction parcours Création, Innovation et Management de projets à l'Université de Toulon
+  description: `Je m’appelle Julien Guigue, étudiant de 23 ans en première année de Master Ingémédia, Information Communiction parcours Création, Innovation et Management de projets numériques à l'Université de Toulon.
   J'ai fait mes classes à Airbus Helicopters en tant que Community Manager, et responsable des communautés digitales du site mais aussi à My Groom Service une société Seynoise spécialisée dans les sites pour hôtels et restaurants. J'envisage de devenir Chef de Projet Digital ou bien Traffic manager. Ce qui m'importe c'est de garder un contact fort avec le développement du digital dans notre société et dans les entreprises.`,
 };
 

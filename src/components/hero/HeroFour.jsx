@@ -31,8 +31,8 @@ const HeroFour = () => {
           <span className="hello">Bonjour! Je suis</span>
           <h3 className="name">Guigue Julien</h3>
           <p className="text">
-            Étudiant Ingémedia en M1 Information communication spécialitée
-            Communication Innovation et Management de Projets
+            Étudiant Ingémedia en M1 Information communication spécialité
+            Communication Innovation et Management de Projets Numériques
           </p>
           <img className="sign" src="img/hero/sign.png" alt="hero" />
         </div>
