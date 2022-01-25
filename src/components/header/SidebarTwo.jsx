@@ -66,7 +66,7 @@ const SidebarTwo = () => {
               className="main"
               style={{
                 backgroundImage: `url(${
-                  process.env.PUBLIC_URL + "img/hero/13.jpg"
+                  process.env.PUBLIC_URL + "img/hero/11.jpg"
                 })`,
               }}
             ></div>
