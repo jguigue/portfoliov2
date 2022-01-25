@@ -9,7 +9,7 @@ const MuseeToulon = () => {
           <span className="category">Scolaire - 2022</span>
         </div>
         <div className="text">
-          <a target="_blank noopener noreferer" href="/musees/">Voir le musée</a>
+          <a target="_blank" rel="noopener noreferrer" href="/musees/">Voir le musée</a>
         </div>
       </div>
       <img className="image_screensite" src="/img/portfolio/musees_toulon/musee_toulon1.webp" alt="Présentation du site Bluepower" />
