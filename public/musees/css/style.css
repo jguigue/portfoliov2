@@ -1,0 +1,1254 @@
+/*
+@Auteur: Julien Guigue
+@URL: https://guiguejulien.com/
+Sommaire :
+00 - AUTRES
+01 - GÉNÉRALITÉES
+02 - PRELOADER
+03 - HEADER
+04 - NAVBAR
+05 - MODALE
+06 - FOOTER
+-- PAGE INTERNE --
+07 - PREPAREZ VOTRE VISITE
+08 - EXPOSITIONS
+09 - COLLECTIONS PRIVEES
+10 - LOCALISATION & CONTACT
+-- ACCUEIL -- 
+11 - 
+
+*/
+
+/* AUTRES */
+/*! locomotive-scroll v4.1.2 | MIT License | https://github.com/locomotivemtl/locomotive-scroll */
+html.has-scroll-smooth {
+  overflow: hidden;
+}
+
+html.has-scroll-dragging {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.has-scroll-smooth body {
+  overflow: hidden;
+}
+
+.has-scroll-smooth [data-scroll-container] {
+  min-height: 100vh;
+}
+
+[data-scroll-direction="horizontal"] [data-scroll-container] {
+  height: 100vh;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+[data-scroll-direction="horizontal"] [data-scroll-section] {
+  display: inline-block;
+  vertical-align: top;
+  white-space: nowrap;
+  height: 100%;
+}
+
+.c-scrollbar {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 11px;
+  height: 100%;
+  transform-origin: center right;
+  transition: transform 0.3s, opacity 0.3s;
+  opacity: 0;
+}
+
+.c-scrollbar:hover {
+  transform: scaleX(1.45);
+}
+
+.c-scrollbar:hover,
+.has-scroll-scrolling .c-scrollbar,
+.has-scroll-dragging .c-scrollbar {
+  opacity: 1;
+}
+
+[data-scroll-direction="horizontal"] .c-scrollbar {
+  width: 100%;
+  height: 10px;
+  top: auto;
+  bottom: 0;
+  transform: scaleY(1);
+}
+
+[data-scroll-direction="horizontal"] .c-scrollbar:hover {
+  transform: scaleY(1.3);
+}
+
+.c-scrollbar_thumb {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: black;
+  opacity: 0.5;
+  width: 7px;
+  border-radius: 10px;
+  margin: 2px;
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+
+.has-scroll-dragging .c-scrollbar_thumb {
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
+}
+
+[data-scroll-direction="horizontal"] .c-scrollbar_thumb {
+  right: auto;
+  bottom: 0;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* 01 - GÉNÉRALITÉES */
+/* On applique une couleur principale en fond */
+html,
+body {
+  background-color: var(--bg-principal);
+  position: initial;
+  margin: 0;
+  min-height: 100vh;
+}
+
+/* On applique le sans-serif au document, pas à tout pour éviter les conflits*/
+p,
+span,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--sansserif);
+}
+
+/* On applique le serif au deux premiers niveaux de titre*/
+h1,
+h2 {
+  font-family: var(--serif);
+  margin: 0;
+}
+
+h2 {
+  font-size: 2.6rem;
+}
+
+h3 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 1.8rem;
+}
+
+h6 {
+  font-size: 1.3rem;
+}
+
+p {
+  font-size: 1.2rem;
+}
+
+i {
+  position: relative;
+  top: 4px;
+}
+
+section {
+  padding: calc(10 * var(--space)) calc(20 * var(--space));
+}
+
+/* Sections de titre */
+.h2 {
+  padding: 0 0 calc(2 * var(--space)) 0;
+}
+
+.h2 hr {
+  border-top: 3px solid var(--noir);
+}
+
+.h2 .hr-white {
+  border-top: 3px solid var(--blanc);
+}
+
+/* Boutons */
+.main-button {
+  padding: calc(1 * var(--space)) calc(2 * var(--space));
+  border: 1px solid var(--noir);
+  color: var(--noir);
+  font-family: var(--sansserif);
+  font-weight: 400;
+  font-size: 1.1rem;
+  transition: ease 0.3s;
+}
+
+.main-button:hover {
+  border: 1px solid var(--principale);
+  color: var(--principale) !important;
+  text-decoration: none;
+  cursor: pointer;
+  transition: ease 0.3s;
+}
+
+.secondary-button {
+  padding: calc(1 * var(--space)) calc(2 * var(--space));
+  background-color: var(--noir);
+  color: var(--blanc);
+  font-family: var(--sansserif);
+  font-weight: 400;
+  font-size: 1.2rem;
+  transition: ease 0.3s;
+}
+
+.secondary-button:hover {
+  background: var(--principale);
+  color: var(--noir) !important;
+  text-decoration: none;
+  cursor: pointer;
+  transition: ease 0.3s;
+}
+
+.secondary-button-white {
+  padding: 10px calc(1 * var(--space));
+  border: 1px solid var(--blanc);
+  color: var(--blanc);
+  font-family: var(--sansserif);
+  font-weight: 400;
+  font-size: 1.2rem;
+  transition: ease 0.3s;
+  align-items: center;
+  white-space: nowrap;
+  padding-left: 1.2rem;
+  padding-right: 1.2rem;
+}
+
+.secondary-button-white:hover {
+  border: 1px solid var(--principale);
+  color: var(--principale) !important;
+  text-decoration: none;
+  cursor: pointer;
+  transition: ease 0.3s;
+}
+
+.circle-button {
+  margin: 0 auto;
+}
+
+.circle-button {
+  width: 150px;
+  height: 150px;
+  font-size: 1.2rem;
+  z-index: 2;
+  color: var(--noir);
+  cursor: pointer;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border: 1px solid var(--noir);
+  border-radius: 50%;
+  text-align: center;
+  font-weight: 500;
+}
+
+.circle-button:before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: -5px;
+  top: -5px;
+  border: 1px solid var(--noir);
+  border-radius: 50%;
+  -webkit-transition: 0.25s ease-in-out;
+  -moz-transition: 0.25s ease-in-out;
+  -ms-transition: 0.25s ease-in-out;
+  -o-transition: 0.25s ease-in-out;
+  transition: 0.25s ease-in-out;
+}
+
+.circle-button:hover {
+  text-decoration: none;
+  color: var(--principale);
+  border: 1px solid var(--principale);
+}
+
+.circle-button:hover:before {
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.circle-button-white {
+  color: var(--blanc);
+  border: 1px solid var(--blanc);
+}
+
+.circle-button-white:before {
+  border: 1px solid var(--blanc);
+}
+
+.circle-button-white:hover {
+  color: var(--principale);
+  border: 1px solid var(--principale);
+}
+
+/* 02 - PRELOADER -> Loading de la page */
+.preloader {
+  width: 100vw;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 99;
+  transition: all cubic-bezier(0.785, 0.135, 0.15, 0.86) 1s;
+  /* transition en cubic-bezier, c'est un snippet de web-profile.net */
+  overflow: hidden;
+}
+
+.preloader .inner {
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+  animation-name: preloader-inner;
+  /* Voir "animation.css" pour le call de l'animation */
+  animation-duration: 0.8s;
+  transition: all ease 0.8s;
+}
+
+.preloader .inner figure {
+  width: 120px;
+  height: 170px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin-bottom: 0;
+}
+
+.preloader .inner figure img {
+  height: 70%;
+  filter: invert(1);
+  /* de base c'est un svg noir, j'applique un filtre pour gagner du temps et éviter d'avoir UN svg logotype noir et UN svg logotype blanc */
+}
+
+.preloader .inner small {
+  width: 100%;
+  display: block;
+  color: #fff;
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.preloader .inner .progress-bar {
+  background: none;
+}
+
+.preloader svg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  fill: #080808;
+}
+
+.preloader svg path {
+  animation-name: preloader-svg;
+  /* Voir "animation.css" pour le call de l'animation */
+  /*Application de l'animation pour la totalité des navigateurs non compatibles, toujours le même snippet de cubic-bezier */
+  -webkit-animation-timing-function: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  -moz-animation-timing-function: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  -o-animation-timing-function: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  -ms-animation-timing-function: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  animation-timing-function: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  animation-duration: 0.7s;
+  animation-play-state: paused;
+  animation-fill-mode: forwards;
+}
+
+/* Avant chargement de la page */
+/* On fait défiler la navbar très haut pour avoir une animation d'arrivée de la navbar */
+.navbar {
+  transform: translateY(-100%);
+  transition-duration: 0.7s;
+  -webkit-transition-duration: 0.7s;
+  transition-timing-function: cubic-bezier(0.86, 0, 0.09, 1);
+  -webkit-transition-timing-function: cubic-bezier(0.86, 0, 0.09, 1);
+  transition-delay: 0.2s;
+}
+
+/* Page chargée */
+/* Quand la page est chargée on descend la div de loading  */
+.page-loaded .preloader {
+  top: 100%;
+}
+
+/* Voir "animation.css" pour le call de l'animation */
+.page-loaded .preloader .inner {
+  transform: translateY(50px);
+  opacity: 0;
+}
+
+/* Reprise de l'animation */
+.page-loaded .preloader svg path {
+  animation-play-state: running;
+}
+
+/* On descend la navbar pour la faire apparaître */
+.page-loaded .navbar {
+  transform: translateY(0);
+}
+
+/* 03 - HEADER */
+/* En fonction de la class de la body, on change l'image en fond du header et le padding du texte */
+/* Musée de l'Egypte */
+.athor header {
+  background-image: url(../medias/athor/img/img.jpg);
+}
+
+/* Accueil */
+.accueil header {
+  background-image: url(../medias/accueil/img/img.jpg);
+}
+
+.accueil header .contenu-header h1 {
+  padding: calc(15 * var(--space)) calc(15 * var(--space));
+  color: var(--blanc);
+  font-size: 4em;
+  overflow: hidden;
+}
+.accueil header .description_expo {
+  padding: calc(0 * var(--space)) calc(15 * var(--space));
+  top: 35vh;
+  left: 0;
+}
+
+/* Musée du Moyen-Âge */
+.edouard header {
+  background-image: url(../medias/edouard/img/img.jpg);
+}
+
+.edouard header .contenu-header h1 {
+  padding: calc(3 * var(--space)) 0 calc(15 * var(--space)) 0;
+}
+
+/* Musée Viking */
+.freyja header {
+  background-image: url(../medias/freyja/img/img.jpg);
+}
+
+.freyja header h1 {
+  padding: calc(6 * var(--space)) 0 calc(14 * var(--space)) 0;
+}
+
+header {
+  height: 100vh;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  position: relative;
+}
+
+header .contenu-header {
+  position: absolute;
+}
+
+header .contenu-header h1 {
+  padding: calc(13 * var(--space)) 0;
+  color: var(--blanc);
+  font-size: 4em;
+  overflow: hidden;
+}
+
+.freyja header .contenu-header h1 {
+  padding: calc(5 * var(--space)) 0 calc(20 * var(--space)) 0;
+}
+
+header img {
+  width: 100vw;
+  position: absolute;
+  z-index: 1;
+}
+
+header .description_expo {
+  align-items: baseline;
+  position: absolute;
+  top: 45vh;
+  left: 20vw;
+}
+
+header .description_expo p {
+  font-weight: 300;
+  text-align: right;
+  color: var(--blanc);
+}
+
+header .description_expo span {
+  border-top: 1px solid var(--blanc);
+  margin: 0 calc(1 * var(--space));
+  padding: 3px 10px;
+}
+
+/* 04 - NAVBAR */
+
+.navbar {
+  padding: 0 calc(5 * var(--space));
+}
+
+.navbar-dropdown {
+  background: none;
+  color: var(--noir);
+  border: none;
+  box-shadow: none;
+}
+
+.navbar-transparent {
+  background: none !important;
+  display: flex !important;
+  border-bottom: 0 !important;
+}
+
+.nav-link {
+  font-size: 1.1rem;
+  transition: all ease 0.2s;
+}
+
+.nav-link img {
+  height: 30px;
+  width: 50px;
+  transition: all ease 0.2s;
+}
+
+.nav-link:hover {
+  transition: all ease 0.2s;
+}
+
+.nav-link:hover img {
+  transition: all ease 0.2s;
+}
+
+/* Filtre issu d'un générateur d'hexa / filter (1.2% de marge d'erreur ici) -> https://codepen.io/sosuke/pen/Pjoqqp */
+.lien-athor .nav-link:hover img {
+  filter: invert(72%) sepia(74%) saturate(288%) hue-rotate(339deg)
+    brightness(101%) contrast(92%);
+}
+
+.lien-athor .nav-link:hover {
+  color: hsl(33, 85%, 73%);
+}
+
+.dropdown-menu .lien-athor a {
+  color: hsl(33, 85%, 73%);
+}
+
+.dropdown-menu .lien-athor a img {
+  filter: invert(72%) sepia(74%) saturate(288%) hue-rotate(339deg)
+    brightness(101%) contrast(92%);
+}
+
+/* Filtre issu d'un générateur d'hexa / filter (0.3% de marge d'erreur ici) -> https://codepen.io/sosuke/pen/Pjoqqp */
+.lien-edouard .nav-link:hover img {
+  filter: invert(51%) sepia(82%) saturate(3917%) hue-rotate(327deg)
+    brightness(108%) contrast(107%);
+}
+
+.lien-edouard .nav-link:hover {
+  color: hsl(355, 100%, 66%);
+}
+
+.dropdown-menu .lien-edouard a {
+  color: hsl(355, 100%, 66%);
+}
+
+.dropdown-menu .lien-edouard a img {
+  filter: invert(51%) sepia(82%) saturate(3917%) hue-rotate(327deg)
+    brightness(108%) contrast(107%);
+}
+
+/* Filtre issu d'un générateur d'hexa / filter (0.1% de marge d'erreur ici) -> https://codepen.io/sosuke/pen/Pjoqqp */
+.lien-freyja .nav-link:hover img {
+  filter: invert(71%) sepia(31%) saturate(504%) hue-rotate(171deg)
+    brightness(93%) contrast(89%);
+}
+
+.lien-freyja .nav-link:hover {
+  color: hsl(209, 61%, 70%);
+}
+
+.dropdown-menu .lien-freyja a {
+  color: hsl(209, 61%, 70%);
+}
+
+.dropdown-menu .lien-freyja a img {
+  filter: invert(71%) sepia(31%) saturate(504%) hue-rotate(171deg)
+    brightness(93%) contrast(89%);
+}
+
+.dropdown-menu .lien-athor,
+.dropdown-menu .lien-freyja,
+.dropdown-menu .lien-edouard {
+  padding: calc(0.4 * var(--space)) 0;
+}
+.dropdown-menu a {
+  display: flex;
+  align-items: center;
+}
+.dropdown-menu a img {
+  margin: 0 calc(0.5 * var(--space));
+  width: 30px;
+  height: 30px;
+}
+
+.navbar-transparent .nav-link {
+  color: var(--blanc) !important;
+}
+
+.navbar-transparent .nav-link:hover {
+  color: var(--principale) !important;
+}
+
+.navbar-transparent .navbar-brand img {
+  filter: brightness(0) invert(1);
+}
+
+.navbar-brand img {
+  height: 3rem !important;
+}
+
+.nav-item.active > .nav-link {
+  color: var(--principale);
+}
+
+.nav-item.active > .nav-link:hover,
+.nav-link:hover {
+  color: var(--principale5);
+}
+
+/* 05 - MODALE */
+.modal-content {
+  width: 50vw;
+  background: var(--bg-principal);
+  padding-bottom: calc(3 * var(--space));
+}
+
+#modal-2 h3 {
+  font-size: 1.8rem;
+  margin: 0;
+  padding-top: calc(1 * var(--space));
+}
+
+#modal-2 img {
+  width: 100vw;
+  height: 25vw;
+  object-fit: cover;
+}
+
+.nombre_billet {
+  border: 1px solid black;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: baseline;
+}
+
+/* Bouton radio personnalisé */
+/* On cache les input de type radio car gênants*/
+.radio-personnalise > input[type="radio"] {
+  display: none;
+}
+
+/* On défini un nouveau bouton radio grâce à un sélecteur before */
+.radio-personnalise > input[type="radio"] + *::before {
+  content: "";
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.8rem;
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 0.1rem;
+  border-color: var(--principale);
+}
+
+.radio-personnalise > input[type="radio"]:checked + * {
+  color: var(--principale);
+  font-weight: 500;
+}
+
+.radio-personnalise > input[type="radio"]:checked + *::before {
+  background: radial-gradient(
+    var(--principale) 0%,
+    var(--principale) 40%,
+    transparent 50%,
+    transparent
+  );
+  border-color: var(--principale);
+}
+
+.radio-personnalise > input[type="radio"] + * {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+}
+
+.compteur {
+  display: inline-block;
+  width: 40px;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+input#numbernormal,
+input#numberenfant {
+  text-align: center;
+  border: none;
+  background: none;
+  width: 40px;
+  height: 40px;
+}
+
+.compteur:hover {
+  cursor: pointer;
+}
+
+form #decrease {
+  margin-right: -4px;
+  border-radius: 8px 0 0 8px;
+}
+
+form #increase {
+  margin-left: -4px;
+  border-radius: 0 8px 8px 0;
+}
+
+form #input-wrap {
+  margin: 0;
+  padding: 0;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* 06 - FOOTER */
+footer {
+  position: initial;
+  width: 100%;
+  color: var(--blanc);
+  min-height: 50vh;
+  background: var(--noir);
+  padding-top: calc(3 * var(--space));
+  font-size: 1.1rem;
+}
+
+footer hr {
+  border-top: 0.1px solid var(--blanc);
+}
+
+footer .ri-heart-2-line {
+  color: #e63027;
+}
+
+footer ul {
+  list-style: none;
+}
+
+footer .rsn a i {
+  font-size: 3em;
+}
+
+footer a {
+  text-decoration: none;
+  color: var(--principale);
+  transition: 0.5s ease;
+}
+
+footer h4 {
+  font-weight: 600;
+}
+
+footer a:hover {
+  text-decoration: none;
+  color: var(--principale5);
+  transition: 0.5s ease;
+}
+
+.logo-footer {
+  width: 70%;
+}
+
+/* 07 - PRÉPAREZ VOTRE VISITE */
+#preparationvisite .img-preparationvisite {
+  overflow: hidden;
+}
+
+#preparationvisite .img-preparationvisite img {
+  width: 100%;
+  height: 70vh;
+  object-fit: cover;
+}
+
+#preparationvisite h2 {
+  font-size: 5rem;
+  margin-bottom: calc(4 * var(--space));
+}
+
+.liste-informations {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  padding-right: 80px;
+  padding-left: 80px;
+}
+
+.liste-informations ul {
+  width: 100%;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.liste-informations ul li {
+  width: 100%;
+  display: flex;
+  padding: 0;
+  list-style: none;
+}
+
+.liste-informations ul li:last-child {
+  margin-bottom: 0;
+}
+
+.liste-informations ul li figure i {
+  font-size: 4rem;
+}
+
+.liste-informations ul li .content {
+  margin: calc(2 * var(--space)) 0;
+}
+
+.liste-informations ul li .content h5 {
+  width: 100%;
+  display: block;
+  margin-bottom: calc(1 * var(--space));
+  font-weight: 600;
+}
+
+.liste-informations ul li .content p {
+  width: 100%;
+  display: block;
+  margin-bottom: calc(1 * var(--space));
+  opacity: 0.7;
+}
+
+/* 08 - EXPOSITIONS */
+/* Billet d'expositions */
+.billet_exposition {
+  height: 30vh;
+}
+
+.billet_exposition img {
+  height: 100%;
+  object-fit: cover;
+  object-position: bottom;
+}
+
+.billet_exposition .description span {
+  color: var(--principale5);
+}
+
+.billet_exposition p {
+  margin-bottom: calc(2 * var(--space));
+}
+
+.bouton-exposition {
+  margin-top: calc(5 * var(--space));
+}
+
+.exposition_separator {
+  border-top: 1px solid var(--principale-grey);
+  margin: calc(5 * var(--space)) 0;
+}
+
+/* 09 - COLLECTIONS PRIVÉES */
+.col-lg-4:nth-child(3n + 1) .description-collection {
+  padding-right: 30px;
+}
+
+.col-lg-4:nth-child(3n + 2) .description-collection {
+  padding: 0 15px;
+}
+
+.col-lg-4:nth-child(3n + 3) .description-collection {
+  padding-left: 30px;
+}
+
+.description-collection {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.description-collection figure {
+  width: 100%;
+  display: block;
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+}
+
+.description-collection figure * {
+  -webkit-transition: 0.25s ease-in-out;
+  -moz-transition: 0.25s ease-in-out;
+  -ms-transition: 0.25s ease-in-out;
+  -o-transition: 0.25s ease-in-out;
+  transition: 0.25s ease-in-out;
+}
+
+.description-collection figure .info {
+  height: 40px;
+  line-height: 40px;
+  border-radius: 0;
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+  text-align: center;
+  border-radius: 40px;
+}
+
+.description-collection figure .info span {
+  width: 100%;
+  max-width: 40px;
+  height: 40px;
+  line-height: 40px;
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  z-index: 0;
+  font-size: 14px;
+  font-weight: 600;
+  background: var(--principale5);
+  color: white;
+  border-radius: 40px;
+}
+
+.description-collection figure .info figure {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 0;
+  z-index: 2;
+  background: #fff;
+  border-radius: 40px;
+}
+
+.description-collection figure .info figure i {
+  width: 39px;
+  height: 47px;
+  font-size: 1.2em;
+}
+
+.description-collection figure .info:hover {
+  width: auto;
+}
+
+.description-collection figure .info:hover figure {
+  opacity: 0;
+}
+
+.description-collection figure .info:hover span {
+  max-width: 220px;
+  padding: 0 var(--space);
+}
+
+.description-collection figure img {
+  width: 100%;
+  height: 50vh;
+  object-fit: cover;
+}
+
+.description-collection .content-box {
+  width: 100%;
+  margin: 0 0 calc(2 * var(--space)) 0;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.description-collection .content-box h4 {
+  width: 100%;
+  display: block;
+  font-family: var(--sansserif);
+  margin-bottom: 0;
+}
+
+.description-collection .content-box p {
+  width: 100%;
+  display: block;
+  margin: 0;
+}
+
+/* 10 - SECTION VIDÉO */
+
+#section-video {
+  height: 45vh;
+  width: 100%;
+  display: block;
+  position: relative;
+  background-size: cover !important;
+  background-position: center !important;
+}
+
+#section-video .container {
+  position: relative;
+  z-index: 1;
+}
+
+.contenu-video {
+  text-align: center;
+  color: var(--blanc);
+}
+
+.contenu-video h2 {
+  margin-bottom: calc(2 * var(--space));
+}
+
+.contenu-video h6 {
+  margin: 0;
+}
+
+.video-bg {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+}
+
+.video-bg:after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: var(--noir);
+  z-index: 1;
+  opacity: 0.9;
+}
+
+.video-bg video {
+  min-width: 100%;
+  min-height: 100%;
+  position: absolute;
+  left: 0;
+  top: -400px;
+}
+
+/* 11 - LOCALISATION & CONTACT */
+.description-map {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* PAGE D'ACCUEIL */
+/* 11 - BIENVENUE */
+#bienvenue {
+  margin-bottom: calc(10 * (var(--space)));
+}
+
+#bienvenue .images-bienvenue {
+  position: absolute;
+  padding-top: calc(5 * (var(--space)));
+}
+
+#bienvenue .image-gauche img {
+  height: 60vh;
+  padding: calc(2 * (var(--space)));
+  width: 100%;
+  object-fit: cover;
+}
+
+#bienvenue .image-centrale img {
+  padding: calc(2 * (var(--space))) 0;
+  height: 80vh;
+  width: 100%;
+  object-fit: cover;
+}
+
+#bienvenue .image-droite img {
+  height: 60vh;
+  padding: calc(2 * (var(--space)));
+
+  width: 100%;
+  object-fit: cover;
+}
+
+/* 12 - TROIS MUSÉES */
+
+#trois-musees .image-gauche figure::before,
+#trois-musees .image-centrale figure::before,
+#trois-musees .image-droite figure::before {
+  content: "";
+  width: 1px;
+  height: 70px;
+  background: var(--noir);
+  position: absolute;
+  left: calc(50% - 0.5px);
+  bottom: -10px;
+  opacity: 0.8;
+}
+
+#trois-musees .image-gauche figure,
+#trois-musees .image-centrale figure,
+#trois-musees .image-droite figure {
+  display: block;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+#trois-musees .image-gauche img,
+#trois-musees .image-centrale img,
+#trois-musees .image-droite img {
+  height: 70vh;
+  padding: calc(2 * (var(--space)));
+  width: 100%;
+  object-fit: cover;
+}
+
+#trois-musees .image-gauche .contenu,
+#trois-musees .image-centrale .contenu,
+#trois-musees .image-droite .contenu {
+  text-align: center;
+}
+
+/* 13 - COLLECTION DES MUSÉES */
+
+#collection-musees .collection-gauche img {
+  height: 90vh;
+  width: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+#collection-musees .collection-droite {
+  height: 100vh;
+  padding: calc(2 * (var(--space))) calc(4 * (var(--space)));
+  background-color: var(--noir);
+}
+
+#collection-musees .collection-droite .galerie-collection {
+  width: 500px;
+}
+
+#collection-musees .collection-droite .galerie-collection .img-collection {
+  padding: calc(1 * (var(--space)));
+}
+
+#collection-musees .collection-droite .galerie-collection .img-collection img {
+  height: 200px;
+  width: 100%;
+  border: var(--blanc) 3px solid;
+  object-fit: cover;
+}
+
+/* 14 - STATISTIQUES */
+
+#statistiques {
+  height: 30vh;
+  background-color: var(--secondaire);
+  padding: calc(2 * var(--space)) calc(20 * var(--space));
+}
+
+#statistiques .item-statistique {
+  text-align: center;
+}
+
+#statistiques h3 {
+  font-family: var(--serif);
+  font-size: 5rem;
+}
+
+/* 15 - EXPOSITIONS DU MOMENT */
+
+#expositions-moment .image-gauche,
+#expositions-moment .image-centrale,
+#expositions-moment .image-droite {
+  display: block;
+  position: relative;
+  padding: calc(2 * var(--space));
+}
+
+#expositions-moment .image-gauche figure,
+#expositions-moment .image-centrale figure,
+#expositions-moment .image-droite figure {
+  display: block;
+  position: relative;
+  padding: 0;
+  margin: 0;
+}
+
+#expositions-moment .image-gauche img,
+#expositions-moment .image-centrale img,
+#expositions-moment .image-droite img {
+  height: 70vh;
+
+  width: 100%;
+  object-fit: cover;
+}
+
+#expositions-moment .image-gauche .contenu,
+#expositions-moment .image-centrale .contenu,
+#expositions-moment .image-droite .contenu {
+  width: calc(100% - 30px);
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  background: #fff;
+  margin-top: -30px;
+  padding-top: 30px;
+  padding-right: 30px;
+  height: 60vh;
+  justify-content: space-around;
+}

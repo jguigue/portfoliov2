@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Musée Viking</title>
+    <!-- Call du CSS principal -->
+    <link rel="stylesheet" href="css/main.css" />
+    <!-- Favicon -->
+    <link rel="icon" href="favicon/favicon-accueil.ico" />
+    <!-- CSS de l'API OpenStreetMap -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css"
+    />
+    <!-- Bibliothéque d'icône RemixIcon -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <!-- API OpenStreetMap -->
+    <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
+  </head>
+
+  <!-- La class dans le body permet de définir la bibiliothéque de couleur utilisée pour l'un des 3 musées -->
+
+  <body class="accueil">
+    <!-- Preloader en JS, pas obligatoire mais j'en avais envie -->
+    <div class="preloader" id="preloader">
+      <svg viewBox="0 0 1920 1080" preserveAspectRatio="none" version="1.1">
+        <path
+          d="M0,0 C305.333333,0 625.333333,0 960,0 C1294.66667,0 1614.66667,0 1920,0 L1920,1080 C1614.66667,1080 1294.66667,1080 960,1080 C625.333333,1080 305.333333,1080 0,1080 L0,0 Z"
+        ></path>
+      </svg>
+      -->
+      <!-- Div qui cache le contenu en attendant un délai fixé de 800ms le JS  -->
+      <div class="inner">
+        <canvas
+          class="progress-bar"
+          id="progress-bar"
+          width="200"
+          height="200"
+        ></canvas>
+        <figure>
+          <img src="medias/accueil/logos/logotype.svg" alt="" />
+        </figure>
+        <small>Chargement...</small>
+      </div>
+    </div>
+    <div class="smooth-scroll">
+      <div class="section-wrapper">
+        <!-- Début de la navbar -->
+        <nav class="navbar sticky-top z-50">
+          <!-- Logo de la navbar -->
+          <a href="" class="navbar-brand">
+            <img src="medias/accueil/logos/logo_navbar.svg" alt="" />
+          </a>
+          <!-- Liste de liens de la navbar -->
+          <ul class="navbar-nav ml-auto d-none d-md-flex">
+            <!-- Items de la navbar -->
+            <li class="nav-item lien-athor">
+              <!-- Lien de la navbar -->
+              <a href="/musees/athor.html" class="nav-link"
+                ><img src="medias/accueil/logos/athor_logotype.svg" alt="" />
+                Musée de l'Egypte</a
+              >
+            </li>
+            <!-- Items de la navbar -->
+            <li class="nav-item lien-freyja">
+              <!-- Lien de la navbar -->
+              <a href="/musees/freyja.html" class="nav-link"
+                ><img
+                  src="medias/accueil/logos/freyja_logotype.svg"
+                  alt=""
+                />
+                Musée des Vikings</a
+              >
+            </li>
+            <!-- Items de la navbar -->
+            <li class="nav-item lien-edouard">
+              <!-- Lien de la navbar -->
+              <a href="/musees/edouard.html" class="nav-link">
+                <img
+                  src="medias/accueil/logos/edouard_logotype.svg"
+                  alt=""
+                />
+                Musée du Moyen-Âge</a
+              >
+            </li>
+          </ul>
+          <!-- Navbar pour mobile -->
+          <div class="navbar-content d-md-none ml-auto">
+            <div class="dropdown with-arrow">
+              <!-- Bouton burger -->
+              <button
+                data-toggle="dropdown"
+                type="button"
+                class="navbar-dropdown"
+              >
+                <i class="ri-menu-line"></i>
+                <i class="fa fa-angle-down" aria-hidden="true"></i>
+              </button>
+              <!-- Menu mobile -->
+              <div class="dropdown-menu dropdown-menu-right w-200">
+                <div class="lien-athor">
+                  <!-- Lien de la navbar -->
+                  <a href="/musees/athor.html"
+                    ><img
+                      src="medias/accueil/logos/athor_logotype.svg"
+                      alt=""
+                    />
+                    Musée de l'Egypte</a
+                  >
+                </div>
+                <!-- Items de la navbar -->
+                <div class="lien-freyja">
+                  <!-- Lien de la navbar -->
+                  <a href="/musees/freyja.html"
+                    ><img
+                      src="medias/accueil/logos/freyja_logotype.svg"
+                      alt=""
+                    />
+                    Musée des Vikings</a
+                  >
+                </div>
+                <!-- Items de la navbar -->
+                <div class="lien-edouard">
+                  <!-- Lien de la navbar -->
+                  <a href="/musees/edouard.html">
+                    <img
+                      src="medias/accueil/logos/edouard_logotype.svg"
+                      alt=""
+                    />
+                    Musée du Moyen-Âge</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+
+        <!-- Header avec une background-img et une img au dessus du h1 -->
+        <header id="header" data-scroll>
+          <img src="medias/accueil/img/bg.png" alt="" />
+          <div class="container-fluid contenu-header">
+            <h1 data-scroll data-scroll-speed="-2">
+              Bienvenue aux musées de Toulon
+            </h1>
+            <div
+              class="description_expo d-flex"
+              data-scroll
+              data-scroll-speed="-3"
+            >
+              <p>
+                La plus grande association de musées <br />
+                jamais créée dans le Sud de la France
+              </p>
+              <span></span>
+            </div>
+          </div>
+        </header>
+
+        <!-- Début de la section Informations -->
+        <section data-scroll-container id="bienvenue" class="px-0">
+          <!-- Début container -->
+          <div class="container">
+            <div class="row">
+              <div class="col-12">
+                <div class="text-center">
+                  <!-- Logo du musée -->
+                  <figure>
+                    <img
+                      class="img-fluid w-50"
+                      src="medias/accueil/logos/logotype.svg"
+                      alt="Image"
+                    />
+                  </figure>
+                  <h2>
+                    Découvrez les trois plus grands musées de la préfecture de
+                    Toulon
+                  </h2>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="row images-bienvenue"
+            data-scroll
+            data-scroll-direction="horizontal"
+            data-scroll-speed="3"
+          >
+            <!-- Image de gauche 4/12 -->
+            <div class="col-12 col-lg-4 image-gauche img-fluid">
+              <img src="medias/accueil/img/replique-viking.jpg" alt="" />
+            </div>
+            <!-- Image de gauche 4/12 -->
+            <div class="col-12 col-lg-4 image-centrale img-fluid">
+              <img src="medias/accueil/img/statue-sage.jpg" alt="" />
+            </div>
+            <!-- Image de gauche 4/12 -->
+            <div class="col-12 col-lg-4 image-droite img-fluid">
+              <img src="medias/accueil/img/egypte-antique.jpg" alt="" />
+            </div>
+          </div>
+        </section>
+        <!-- Début de la section des trois musées -->
+        <section data-scroll-container id="trois-musees" class="bg-white">
+          <!-- Début container -->
+          <div class="container">
+            <div class="row">
+              <!-- Section de titre -->
+              <div class="h2">
+                <h2>Nos trois musées</h2>
+                <hr />
+              </div>
+            </div>
+          </div>
+          <div class="row images-bienvenue">
+            <!-- Musée de l'Egypte, bloc de gauche 4/12 -->
+            <div class="col-12 col-lg-4 image-gauche img-fluid">
+              <figure>
+                <img src="medias/accueil/img/sarcophage.jpg" alt="" />
+              </figure>
+              <div class="contenu">
+                <h3>Musée de l'Egypte</h3>
+                <a href="musees/athor.html" class="main-button">Découvrir</a>
+              </div>
+            </div>
+            <!-- Musée des vikings, bloc de gauche 4/12 -->
+            <div class="col-12 col-lg-4 image-centrale img-fluid">
+              <figure>
+                <img src="medias/accueil/img/drakkar.jpg" alt="" />
+              </figure>
+              <div class="contenu">
+                <h3>Musée des Vikings</h3>
+                <a href="musees/freyja.html" class="main-button">Découvrir</a>
+              </div>
+            </div>
+            <!-- Musée du Moyen-Âge, bloc de gauche 4/12 -->
+            <div class="col-12 col-lg-4 image-droite img-fluid">
+              <figure>
+                <img src="medias/accueil/img/chevaliers.jpg" alt="" />
+              </figure>
+              <div class="contenu">
+                <h3>Musée du Moyen-Âge</h3>
+                <a href="musees/edouard.html" class="main-button">Découvrir</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Début de la section de la collection -->
+        <section
+          data-scroll-container
+          class="px-0 bg-white"
+          id="collection-musees"
+        >
+          <div class="row">
+            <div
+              class="col-12 col-lg-6 collection-gauche"
+              data-scroll
+              data-scroll-speed="1"
+            >
+              <img src="medias/accueil/img/collection-gauche.jpg" alt="" />
+            </div>
+            <div class="col-12 col-lg-6 collection-droite" data-scroll>
+              <div class="h2 text-white">
+                <h2>Nos trois musées</h2>
+                <hr class="hr-white" />
+              </div>
+              <div class="row galerie-collection">
+                <div class="col-6 img-collection">
+                  <img src="medias/accueil/img/passionkalkar.jpg" alt="" />
+                </div>
+                <div
+                  class="col-6 img-collection"
+                  data-scroll
+                  data-scroll-speed="1"
+                >
+                  <img src="medias/accueil/img/peinutrefroyja.jpg" alt="" />
+                </div>
+                <div class="col-6 img-collection">
+                  <img src="medias/accueil/img/reinesaba.jpg" alt="" />
+                </div>
+                <div
+                  class="col-6 img-collection"
+                  data-scroll
+                  data-scroll-speed="1"
+                >
+                  <img src="medias/accueil/img/adoration-magi.jpg" alt="" />
+                </div>
+                <div class="col-lg-6 col-12 img-collection">
+                  <img src="medias/accueil/img/stelle-nakhi.jpg" alt="" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Début de la section statistiques -->
+        <section id="statistiques">
+          <div class="row">
+            <div class="col-lg-3 col-6 item-statistique">
+              <h3>3M</h3>
+              <span>3 millions de visiteurs par an</span>
+            </div>
+            <div class="col-lg-3 col-6 item-statistique">
+              <h3>15K</h3>
+              <span>15 000 abonnés</span>
+            </div>
+            <div class="col-lg-3 col-6 item-statistique">
+              <h3>6 600+</h3>
+              <span>Plus de 6 600 pièces uniques</span>
+            </div>
+            <div class="col-lg-3 col-6 item-statistique">
+              <h3>3</h3>
+              <span>3 musées originaux</span>
+            </div>
+          </div>
+        </section>
+        <!-- Début de la section des expositions -->
+        <section data-scroll-container id="expositions-moment" class="bg-white">
+          <!-- Début container -->
+          <div class="container">
+            <div class="row">
+              <!-- Section de titre -->
+              <div class="h2">
+                <h2>Nos expositions du moment</h2>
+                <hr />
+              </div>
+            </div>
+          </div>
+          <div class="row images-bienvenue">
+            <!-- Musée de l'Egypte, bloc de gauche 4/12 -->
+            <div class="col-12 col-lg-4 image-gauche img-fluid">
+              <figure>
+                <img src="medias/accueil/img/spirale_akhenamon.jpg" alt="" />
+              </figure>
+              <div class="contenu d-flex flex-column text-center">
+                <h3>Exposition Spirale d'Akhenamon</h3>
+                <span>Exposition temporaire</span>
+                <p>
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Est
+                  exercitationem libero expedita repudiandae cupiditate aliquam
+                  ut in quos rerum? Accusantium numquam rem.
+                </p>
+                <a href="musees/athor.html" class="secondary-button text-center"
+                  >Découvrir le musée</a
+                >
+              </div>
+            </div>
+            <!-- Musée des vikings, bloc de gauche 4/12 -->
+            <div class="col-12 col-lg-4 image-gauche img-fluid">
+              <figure>
+                <img src="medias/accueil/img/exposition-armure.jpg" alt="" />
+              </figure>
+              <div class="contenu d-flex flex-column text-center">
+                <h3>Reproduction des arumres d'Edouard III</h3>
+                <span>Exposition temporaire</span>
+                <p>
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Est
+                  exercitationem libero expedita repudiandae cupiditate aliquam
+                  ut in quos rerum? Accusantium numquam rem.
+                </p>
+                <a
+                  href="musees/edouard.html"
+                  class="secondary-button text-center"
+                  >Découvrir le musée</a
+                >
+              </div>
+            </div>
+            <!-- Musée du Moyen-Âge, bloc de gauche 4/12 -->
+            <div class="col-12 col-lg-4 image-gauche img-fluid">
+              <figure>
+                <img src="medias/accueil/img/drakkar-olaf.jpg" alt="" />
+              </figure>
+              <div class="contenu d-flex flex-column text-center">
+                <h3>Reproduction du drakkar d'Olaf le borgne</h3>
+                <span>Exposition temporaire</span>
+                <p>
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Est
+                  exercitationem libero expedita repudiandae cupiditate aliquam
+                  ut in quos rerum? Accusantium numquam rem.
+                </p>
+                <a
+                  href="musees/freyja.html"
+                  class="secondary-button text-center"
+                  >Découvrir le musée</a
+                >
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Début du footer  -->
+        <footer>
+          <!-- Début du container -->
+          <div class="container">
+            <div class="d-lg-flex">
+              <!-- Bloc avec le logo horizontal de longueur 3/12 -->
+              <div class="col-lg-3 d-lg-flex">
+                <img
+                  class="logo-footer"
+                  src="medias/accueil/logos/logo_horizontal_blanc.svg"
+                  alt=""
+                />
+              </div>
+
+              <!-- Bloc des liens interne de longueur 3/12 -->
+              <div class="col-lg-3">
+                <h4>Menu</h4>
+                <ul>
+                  <li><a data-scroll-to href="#header">Accueil</a></li>
+                  <li>
+                    <a data-scroll-to href="#bienvenue">Bienvenue</a>
+                  </li>
+                  <li>
+                    <a data-scroll-to href="#collection-musees"
+                      >Collections uniques</a
+                    >
+                  </li>
+                  <li>
+                    <a data-scroll-to href="#trois-musees">Les trois musées</a>
+                  </li>
+                  <li>
+                    <a data-scroll-to href="#expositions-moment"
+                      >Expositions du moment</a
+                    >
+                  </li>
+                </ul>
+              </div>
+              <!-- Bloc des liens des autres musées de longueur 3/12 -->
+              <div class="col-lg-3">
+                <h4>Les autres musées</h4>
+                <ul>
+                  <li><a href="index.html">Musées de Toulon</a></li>
+                  <li>
+                    <a href="musees/athor.html">Musée Egyptien d'Athor</a>
+                  </li>
+                  <li>
+                    <a href="musees/freyja.html">Musée Viking de Freyja </a>
+                  </li>
+                  <li>
+                    <a href="musees/accueil.html"
+                      >Musée du Moyen-Âge d'accueil'</a
+                    >
+                  </li>
+                </ul>
+              </div>
+              <!-- Bloc de rappel des informations + RSN de longueur 3/12 -->
+              <div class="col-lg-3">
+                <h4>Informations</h4>
+                <div class="description-map">
+                  <h5 class="m-0">Musée national du Moyen-Âge d'accueil</h5>
+                  <span
+                    ><i class="ri-map-pin-line pr-5"></i>14 rue du château
+                    royal, <br />
+                    83000 Toulon, France</span
+                  >
+                  <br />
+                  <span
+                    ><i class="ri-phone-line pr-5"></i>(+33) 6 51 56 05 35</span
+                  >
+                </div>
+                <div class="d-lg-flex rsn mt-5">
+                  <a href="" class="mr-20"><i class="ri-instagram-line"></i></a>
+                  <a href="" class="mx-20"><i class="ri-twitter-line"></i></a>
+                  <a href="" class="ml-10"><i class="ri-facebook-line"></i></a>
+                </div>
+              </div>
+            </div>
+            <!-- HR de séparation du footer / sous-footer -->
+            <hr class="my-20" />
+            <!-- Sous-footer -->
+            <div class="d-lg-flex">
+              <!-- Bloc de copyright de longueur 6/12 -->
+              <div class="col-lg-6">
+                <p>Projet fictif / scolaire - 2022</p>
+              </div>
+              <!-- Bloc d'auteur de longueur 6/12 -->
+              <div class="col-lg-6">
+                <p class="float-lg-right">
+                  Crée avec <i class="ri-heart-2-line"></i> par Guigue Julien
+                </p>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+    <script src="js/halfmoon.min.js"></script>
+    <!--   Script du framework -->
+    <script src="js/jquery.min.js"></script>
+    <!-- Jquery-->
+    <script src="js/script.js"></script>
+    <!-- Script principal -->
+    <script src="js/locomotive-scroll.min.js"></script>
+    <!-- Script principal -->
+    <script>
+      (function () {
+        var scroll = new LocomotiveScroll({
+          el: document.querySelector(".smooth-scroll"),
+          smooth: true,
+        });
+      })();
+    </script>
+  </body>
+</html>

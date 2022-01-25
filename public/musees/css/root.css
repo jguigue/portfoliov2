@@ -1,0 +1,84 @@
+:root {
+  /* Polices */
+  --serif: "EB Garamond", serif;
+  --sansserif: "Raleway", sans-serif;
+  --thin: "100";
+  --light: "300";
+  --regular: "400";
+  --bold: "700";
+
+  /* Modification des couleurs du framework */
+  --primary-color: var(--principale);
+
+  /* Espace fixe pour la cohérence */
+  --space: 15px;
+}
+
+.athor {
+  /* Couleurs */
+  --principale: #f5c080;
+  --principale5: hsl(33, 55%, 50%);
+  --principale-grey: hsl(33, 25%, 90%);
+  --principale-grey50: hsla(33, 25%, 50%, 0.1);
+  --secondaire: hsl(99, 70%, 88%);
+  --complementaire: hsl(207, 69%, 80%);
+  --noir: #1e1d18;
+  --blanc: #fff;
+
+  /* Background */
+  --bg-principal: var(--principale-grey);
+
+  /* Modification des couleurs du framework */
+  --primary-color: var(--principale);
+}
+
+.freyja {
+  /* Couleurs */
+  --principale: #84b4e1;
+  --principale5: hsl(209, 61%, 50%);
+  --principale-grey: hsl(209, 84%, 95%);
+  --secondaire: rgb(218, 246, 203);
+  --complementaire: rgb(50, 87, 164);
+  --noir: #1e1d18;
+  --blanc: #fff;
+
+  /* Background */
+  --bg-principal: var(--principale-grey);
+
+  /* Modification des couleurs du framework */
+  --primary-color: var(--principale);
+}
+
+.edouard {
+  /* Couleurs */
+  --principale: #ff5260;
+  --principale5: hsl(355, 100%, 50%);
+  --principale-grey: hsl(349, 65%, 97%);
+  --secondaire: rgb(218, 246, 203);
+  --complementaire: rgb(50, 87, 164);
+  --noir: #1e1d18;
+  --blanc: #fff;
+
+  /* Background */
+  --bg-principal: var(--principale-grey);
+
+  /* Modification des couleurs du framework */
+  --primary-color: var(--principale);
+}
+
+.accueil {
+  /* Couleurs */
+  --principale: #8cc9aa;
+  --principale5: hsl(150, 36%, 50%);
+  --principale-grey: rgb(215, 233, 224);
+  --secondaire: rgb(248, 228, 178);
+  --complementaire: rgb(165, 183, 200);
+  --noir: #1e1d18;
+  --blanc: #fff;
+
+  /* Background */
+  --bg-principal: var(--principale-grey);
+
+  /* Modification des couleurs du framework */
+  --primary-color: var(--principale);
+}

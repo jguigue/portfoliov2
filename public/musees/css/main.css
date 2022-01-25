@@ -1,0 +1,8 @@
+/* Fonts */
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;600&display=swap");
+@import url("halfmoon.min.css"); /* Framework Halfmoon voir la doc ici : https://www.gethalfmoon.com/docs/introduction/ */
+@import url("root.css"); /* Variables par défaut */
+@import url("style.css"); /* CSS */
+@import url("animation.css"); /* Animations */
+@import url("responsive.css"); /* Responsive */

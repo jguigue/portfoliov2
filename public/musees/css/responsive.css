@@ -1,0 +1,269 @@
+@media only screen and (max-width: 767px),
+  only screen and (max-device-width: 767px) {
+  .preloader {
+    background: #080808;
+  }
+
+  .preloader svg {
+    display: none;
+  }
+
+  .page-transition {
+    background: var(--noir);
+  }
+
+  .page-transition svg {
+    display: none;
+  }
+
+  section {
+    padding: calc(5 * var(--space)) calc(2 * var(--space));
+  }
+
+  .navbar {
+    padding: 0 calc(2 * var(--space));
+  }
+
+  header {
+    background-size: cover;
+    background-position: 25%;
+  }
+
+  header .contenu-header h1 {
+    padding: calc(6 * var(--space)) 0 calc(8 * var(--space)) 0 !important;
+  }
+
+  header img {
+    display: none;
+  }
+
+  header .description_expo {
+    display: none !important;
+  }
+
+  .modal-content {
+    width: 90vw;
+  }
+
+  footer {
+    text-align: center;
+  }
+
+  #preparationvisite .img-preparationvisite {
+    margin: 0;
+  }
+
+  #preparationvisite .img-preparationvisite img {
+    height: initial;
+    margin-bottom: calc(2 * var(--space));
+  }
+
+  #preparationvisite .liste-informations figure {
+    margin: 0;
+  }
+
+  .liste-informations ul li .content {
+    margin: 0;
+    text-align: center;
+  }
+
+  .liste-informations ul li {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .billet_exposition {
+    height: initial;
+  }
+
+  #section-video {
+    height: 50vh;
+  }
+
+  .side-icon-list {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .col-lg-4:nth-child(3n + 1) .exhibition-box {
+    padding: 0;
+  }
+
+  .col-lg-4:nth-child(3n + 2) .exhibition-box {
+    padding: 0;
+  }
+
+  .col-lg-4:nth-child(3n + 3) .exhibition-box {
+    padding: 0;
+  }
+
+  /* PAGE D'ACCUEIL */
+  .accueil header .contenu-header h1 {
+    padding: calc(15 * var(--space)) 0;
+    color: var(--blanc);
+    font-size: 4em;
+    overflow: hidden;
+  }
+
+  .accueil header .description_expo {
+    padding: calc(3 * var(--space)) calc(0 * var(--space));
+    top: 55vh;
+    width: 100vw;
+    display: flex !important;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .accueil header .description_expo p {
+    font-size: 1.6rem;
+  }
+
+  /* 11 - BIENVENUE */
+  header .contenu-header h1 {
+    text-align: center;
+  }
+
+  #bienvenue {
+    padding-top: var(--space);
+    padding-bottom: var(--space);
+    margin-bottom: 0;
+  }
+
+  #bienvenue .images-bienvenue {
+    position: initial;
+  }
+
+  #bienvenue .image-gauche img {
+    height: 20vh;
+    padding: calc(0.5 * (var(--space))) 0;
+  }
+
+  #bienvenue .image-centrale img {
+    height: 20vh;
+    object-position: top;
+    padding: calc(0.5 * (var(--space))) 0;
+  }
+
+  #bienvenue .image-droite img {
+    height: 20vh;
+    padding: calc(0.5 * (var(--space))) 0;
+  }
+
+  /* 12 - TROIS MUSÉES */
+
+  #trois-musees {
+    width: 100vw;
+    padding: var(--space) 0 var(--space) 0;
+    margin: 0;
+  }
+
+  #trois-musees .h2 {
+    padding: calc(2 * var(--space));
+  }
+
+  #trois-musees .image-gauche figure,
+  #trois-musees .image-centrale figure,
+  #trois-musees .image-droite figure {
+    width: 100vw;
+    padding: 0;
+    margin: 0;
+  }
+
+  #trois-musees .image-gauche img,
+  #trois-musees .image-centrale img,
+  #trois-musees .image-droite img {
+    height: 40vh;
+    padding: calc(2 * (var(--space)));
+    width: 100%;
+    object-position: top;
+    object-fit: cover;
+  }
+
+  /* 13 - COLLECTION DES MUSÉES */
+
+  #collection-musees {
+    padding: 0;
+  }
+
+  #collection-musees .collection-gauche img {
+    height: 20vh;
+    width: 100%;
+    object-fit: cover;
+    object-position: top;
+  }
+
+  #collection-musees .collection-droite {
+    height: 80vh;
+    padding: calc(2 * (var(--space))) calc(2 * (var(--space)));
+    background-color: var(--noir);
+  }
+
+  #collection-musees .collection-droite .galerie-collection {
+    width: 100%;
+  }
+
+  #collection-musees .collection-droite .galerie-collection .img-collection {
+    padding: calc(0.5 * (var(--space)));
+  }
+
+  #collection-musees
+    .collection-droite
+    .galerie-collection
+    .img-collection
+    img {
+    height: 133px;
+    width: 100%;
+  }
+
+  /* 14 - STATISTIQUES */
+
+  #statistiques {
+    height: 50vh;
+    background-color: var(--secondaire);
+    padding: calc(2 * var(--space)) calc(2 * var(--space));
+  }
+
+  #statistiques .item-statistique {
+    text-align: center;
+  }
+
+  #statistiques h3 {
+    font-family: var(--serif);
+    font-size: 5rem;
+  }
+
+  /* 15 - EXPOSITIONS DU MOMENT */
+
+  #expositions-moment .image-gauche,
+  #expositions-moment .image-centrale,
+  #expositions-moment .image-droite {
+    display: block;
+    position: relative;
+    padding: calc(2 * var(--space));
+  }
+
+  #expositions-moment .image-gauche figure,
+  #expositions-moment .image-centrale figure,
+  #expositions-moment .image-droite figure {
+    display: block;
+    position: relative;
+    padding: 0;
+    margin: 0;
+  }
+
+  #expositions-moment .image-gauche img,
+  #expositions-moment .image-centrale img,
+  #expositions-moment .image-droite img {
+    height: 30vh;
+  }
+
+  #expositions-moment .image-gauche .contenu,
+  #expositions-moment .image-centrale .contenu,
+  #expositions-moment .image-droite .contenu {
+    width: 100%;
+    display: flex;
+    padding-right: 0;
+    height: 40vh;
+  }
+}

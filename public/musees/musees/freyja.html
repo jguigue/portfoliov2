@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Musée Viking</title>
+    <!-- Call du CSS principal -->
+    <link rel="stylesheet" href="../css/main.css" />
+    <!-- Favicon -->
+    <link rel="icon" href="../favicon/favicon-freyja.ico" />
+    <!-- CSS de l'API OpenStreetMap -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css"
+    />
+    <!-- Bibliothéque d'icône RemixIcon -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <!-- API OpenStreetMap -->
+    <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
+  </head>
+
+  <!-- La class dans le body permet de définir la bibiliothéque de couleur utilisée pour l'un des 3 musées -->
+
+  <body class="freyja">
+    <!-- Preloader en JS, pas obligatoire mais j'en avais envie -->
+    <div class="preloader" id="preloader">
+      <svg viewBox="0 0 1920 1080" preserveAspectRatio="none" version="1.1">
+        <path
+          d="M0,0 C305.333333,0 625.333333,0 960,0 C1294.66667,0 1614.66667,0 1920,0 L1920,1080 C1614.66667,1080 1294.66667,1080 960,1080 C625.333333,1080 305.333333,1080 0,1080 L0,0 Z"
+        ></path>
+      </svg>
+      -->
+      <!-- Div qui cache le contenu en attendant un délai fixé de 800ms le JS  -->
+      <div class="inner">
+        <canvas
+          class="progress-bar"
+          id="progress-bar"
+          width="200"
+          height="200"
+        ></canvas>
+        <figure>
+          <img
+            src="../medias/freyja/logos/logotype.svg"
+            alt="Logotype musée Freyja"
+          />
+        </figure>
+        <small>Chargement...</small>
+      </div>
+    </div>
+    <!-- Début de la modale, cachée par défaut-->
+    <div class="modal" id="modal-2" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <a href="#" class="btn close" role="button" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </a>
+          <!-- Début container -->
+          <div class="container">
+            <!-- Section de titre -->
+            <div class="h2 mt-0">
+              <h2>Acheter un billet</h2>
+              <hr />
+            </div>
+            <div class="d-lg-flex">
+              <div class="col-lg-4">
+                <!-- Début du formulaire -->
+                <form>
+                  <!-- Input radio personnalisé -->
+                  <h3>Type de billet</h3>
+                  <div class="radio-personnalise">
+                    <input
+                      type="radio"
+                      name="type-billet"
+                      id="billet-1"
+                      value="billet-normal"
+                    />
+                    <label for="billet-1">Exposition permanente</label>
+                  </div>
+                  <!-- Input radio personnalisé -->
+                  <div class="radio-personnalise">
+                    <input
+                      type="radio"
+                      name="type-billet"
+                      id="billet-2"
+                      value="billet-reduit"
+                    />
+                    <label for="billet-2"
+                      >Exposition + collections privées</label
+                    >
+                  </div>
+                  <h3>Nombre de billet</h3>
+                  <div class="d-flex">
+                    <div class="mr-10 col-5">
+                      <p>Tarif normal</p>
+                      <!-- Input nombre personnalisé qui call une fonction JS pour augmenter ou réduire le nombre dans l'input "number" -->
+                      <div class="nombre_billet">
+                        <!-- Au clique, appel "increaseValueNormal, j'aurais pu ajouter un switch avec une valeur dans la fonction" -->
+                        <div
+                          class="compteur"
+                          id="decrease"
+                          onclick="decreaseValueNormal()"
+                          value="Decrease Value"
+                        >
+                          -
+                        </div>
+                        <input type="number" id="numbernormal" value="0" />
+                        <!-- Au clique, appel "increaseValueNormal, j'aurais pu ajouter un switch avec une valeur dans la fonction" -->
+                        <div
+                          class="compteur"
+                          id="increase"
+                          onclick="increaseValueNormal()"
+                          value="Increase Value"
+                        >
+                          +
+                        </div>
+                      </div>
+                    </div>
+                    <div class="offset-sm-1 offset-lg-0 col-5">
+                      <p>Tarif enfant</p>
+                      <!-- Input nombre personnalisé qui call une fonction JS pour augmenter ou réduire le nombre dans l'input "number" -->
+                      <div class="nombre_billet">
+                        <!-- Au clique, appel "increaseValueNormal, j'aurais pu ajouter un switch avec une valeur dans la fonction" -->
+                        <div
+                          class="compteur"
+                          id="decrease"
+                          onclick="decreaseValueEnfant()"
+                          value="Decrease Value"
+                        >
+                          -
+                        </div>
+                        <input type="number" id="numberenfant" value="0" />
+                        <!-- Au clique, appel "increaseValueNormal, j'aurais pu ajouter un switch avec une valeur dans la fonction" -->
+                        <div
+                          class="compteur"
+                          id="increase"
+                          onclick="increaseValueEnfant()"
+                          value="Increase Value"
+                        >
+                          +
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <h3 class="mt-10">Total : 120€</h3>
+                  <br />
+                  <!-- Bouton submit qui ne marche pas, pas de php ici -->
+                  <a class="secondary-button m-auto">Acheter des billets</a>
+                </form>
+              </div>
+              <!-- Image à droite -->
+              <div class="offset-lg-1 mt-20 mt-lg-0">
+                <img
+                  class="img-fluid"
+                  src="../medias/freyja/img/peinture-viking.jpg"
+                  alt="Peinture viking"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="smooth-scroll">
+      <div class="section-wrapper">
+        <!-- Début de la navbar -->
+        <nav class="navbar sticky-top z-50">
+          <!-- Logo de la navbar -->
+          <a href="#" class="navbar-brand">
+            <img
+              src="../medias/freyja/logos/logo_navbar.svg"
+              alt="Logo navbar musée Freyja"
+            />
+          </a>
+          <!-- Liste de liens de la navbar -->
+          <ul class="navbar-nav ml-auto d-none d-md-flex">
+            <!-- Items de la navbar -->
+            <li class="nav-item">
+              <!-- Lien de la navbar -->
+              <a href="#" class="nav-link">Accueil</a>
+            </li>
+            <!-- Items de la navbar -->
+            <li class="nav-item">
+              <!-- Lien de la navbar -->
+              <a href="#preparationvisite" data-scroll-to class="nav-link"
+                >Informations</a
+              >
+            </li>
+            <!-- Items de la navbar -->
+            <li class="nav-item">
+              <!-- Lien de la navbar -->
+              <a href="#exposition" data-scroll-to class="nav-link"
+                >Expositions</a
+              >
+            </li>
+            <!-- Items de la navbar -->
+            <li class="nav-item">
+              <!-- Lien de la navbar -->
+              <a href="#collection" data-scroll-to class="nav-link"
+                >Collections privées</a
+              >
+            </li>
+            <!-- Items de la navbar -->
+            <li class="nav-item">
+              <!-- Lien de la navbar -->
+              <a href="#contact" data-scroll-to class="nav-link"
+                >Localisation & contact</a
+              >
+            </li>
+            <!-- Bouton vers une modale de réservation -->
+            <li class="nav-item">
+              <div class="nav-link">
+                <a href="#modal-2" role="button" class="main-button"
+                  >Acheter un billet</a
+                >
+              </div>
+            </li>
+          </ul>
+          <!-- Navbar pour mobile -->
+          <div class="navbar-content d-md-none ml-auto">
+            <div class="dropdown with-arrow">
+              <!-- Bouton burger -->
+              <button
+                data-toggle="dropdown"
+                type="button"
+                class="navbar-dropdown"
+              >
+                <i class="ri-menu-line"></i>
+                <i class="fa fa-angle-down" aria-hidden="true"></i>
+              </button>
+              <!-- Menu mobile -->
+              <div class="dropdown-menu dropdown-menu-right w-200">
+                <a data-scroll-to href="#" class="dropdown-item">Accueil</a>
+                <a
+                  data-scroll-to
+                  href="#preparationvisite"
+                  class="dropdown-item"
+                  >Informations</a
+                >
+                <a data-scroll-to href="#exposition" class="dropdown-item"
+                  >Expositions</a
+                >
+                <a data-scroll-to href="#collection" class="dropdown-item"
+                  >Collections privées</a
+                >
+                <a data-scroll-to href="#contact" class="dropdown-item"
+                  >Localisation & contact</a
+                >
+                <!-- Bouton vers une modale de réservation -->
+                <div class="dropdown-content">
+                  <a
+                    href="#modal-2"
+                    role="button"
+                    class="secondary-button my-20"
+                    >Acheter un billet</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+
+        <!-- Header avec une background-img et une img au dessus du h1 -->
+        <header id="header" data-scroll>
+          <img
+            src="../medias/freyja/img/bg.png"
+            alt="Image background église norvégienne"
+          />
+          <div class="container-fluid contenu-header">
+            <h1 class="text-center m-0" data-scroll data-scroll-speed="-2">
+              Église nordique de la vallée de Nvordnalla
+            </h1>
+            <div
+              class="description_expo d-flex"
+              data-scroll
+              data-scroll-speed="-3"
+            >
+              <p>
+                Une reproduction fidèle de la <br />
+                célèbre dernière église viking
+              </p>
+              <span></span>
+            </div>
+            <!-- Bouton de scroll vers la première section -->
+            <a
+              data-scroll
+              data-scroll-speed="-1"
+              data-scroll-to
+              href="#preparationvisite"
+              class="circle-button circle-button-white m-auto"
+              >En voir plus</a
+            >
+          </div>
+        </header>
+
+        <!-- Début de la section Informations -->
+        <section data-scroll-container id="preparationvisite">
+          <!-- Début container -->
+          <div class="container">
+            <div class="row">
+              <div class="col-12">
+                <div class="text-center">
+                  <!-- Logo du musée -->
+                  <figure data-scroll data-scroll-speed="-1">
+                    <img
+                      class="img-fluid w-50"
+                      src="../medias/freyja/logos/logotype.svg"
+                      alt="Logo musée freyja"
+                    />
+                  </figure>
+                  <h2 data-scroll data-scroll-speed="-1">
+                    Le plus grand musée sur <br />
+                    les vikings en France
+                  </h2>
+                </div>
+              </div>
+              <!-- Image de gauche 7/12 -->
+              <div class="col-lg-7 d-flex align-items-center">
+                <figure
+                  data-scroll
+                  data-scroll-direction="horizontal"
+                  data-scroll-speed="-1"
+                  class="img-fluid img-preparationvisite"
+                >
+                  <img
+                    src="../medias/freyja/img/viking.jpg"
+                    alt="Décor viking, bouclier viking & fourure"
+                  />
+                </figure>
+              </div>
+              <!-- Liste de droite 5/12 -->
+              <div class="col-lg-5">
+                <div class="liste-informations">
+                  <!-- Liste de 3 items-->
+                  <ul>
+                    <!-- Item 1 -->
+                    <li>
+                      <figure>
+                        <i class="ri-time-line"></i>
+                      </figure>
+                      <div class="content">
+                        <h5>Heures d'ouverture</h5>
+                        <p>
+                          <strong>En semaine :</strong><br />
+                          Mardi – Vendredi: 11h00 - 19h00<br />
+                          <strong>Week-end</strong><br />
+                          Samedi – Dimanche: 11h00 - 15h00<br />
+                        </p>
+                      </div>
+                    </li>
+                    <!-- Item 2 -->
+                    <li>
+                      <figure>
+                        <i class="ri-coupon-3-line"></i>
+                      </figure>
+                      <div class="content">
+                        <h5>Réserver en ligne</h5>
+                        <p>
+                          Vous pouvez dès maintenant réserver en ligne avec
+                          notre module de réservation rapide et pratique
+                        </p>
+                      </div>
+                    </li>
+                    <!-- Item 3 -->
+                    <li>
+                      <figure>
+                        <i class="ri-treasure-map-line"></i>
+                      </figure>
+                      <div class="content">
+                        <h5>Trouver le musée</h5>
+                        <p>
+                          <span
+                            ><i class="ri-map-pin-line pr-5"></i>12 rue du
+                            valhalla,
+                            <br />
+                            83000 Toulon, France</span
+                          >
+                          <br />
+                          <span
+                            ><i class="ri-phone-line pr-5"></i>(+33) 6 51 56 05
+                            35</span
+                          >
+                        </p>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Début de la section des expositions -->
+        <section
+          data-scroll-container
+          id="exposition"
+          class="bg-white"
+          data-scroll-container
+        >
+          <!-- Début container -->
+          <div class="container">
+            <!-- Section de titre -->
+            <div class="h2">
+              <h2>Expositions du moment</h2>
+              <hr />
+            </div>
+            <!-- Billet d'exposition -->
+            <div
+              class="billet_exposition d-lg-flex"
+              data-scroll
+              data-scroll-direction="horizontal"
+              data-scroll-speed="0.5"
+            >
+              <img
+                class="img-fluid w-lg-100 col-12 col-lg-5"
+                src="../medias/freyja/img/drakkar-olaf.jpg"
+                alt="Drakkar viking d'olaf le borgne"
+              />
+              <div class="description offset-lg-1">
+                <h3>Drakkar d'Olaf le borgne</h3>
+                <span>Exposition temporaire</span>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Laudantium recusandae numquam assumenda enim ducimus vero at
+                  impedit. Quam, voluptatibus libero reiciendis atque, ratione
+                  eius tempore, rerum distinctio fugiat quaerat quis?
+                </p>
+                <!-- Lien vers la modale de réservation -->
+                <a href="#modal-2" role="button" class="secondary-button mt-20"
+                  >Acheter un ticket</a
+                >
+              </div>
+            </div>
+            <!-- Ligne de séparation -->
+            <hr class="exposition_separator" />
+            <!-- Billet d'exposition -->
+            <div
+              class="billet_exposition d-lg-flex"
+              data-scroll
+              data-scroll-direction="horizontal"
+              data-scroll-speed="-0.5"
+            >
+              <img
+                class="img-fluid w-lg-100 col-12 col-lg-5"
+                src="../medias/freyja/img/halle-viking.jpg"
+                alt="Décor halle viking authentique"
+              />
+              <div class="description offset-lg-1">
+                <h3>Reproduction d'une halle viking</h3>
+                <span>Exposition permanente</span>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Laudantium recusandae numquam assumenda enim ducimus vero at
+                  impedit. Quam, voluptatibus libero reiciendis atque, ratione
+                  eius tempore, rerum distinctio fugiat quaerat quis?
+                </p>
+                <!-- Lien vers la modale de réservation -->
+                <a href="#modal-2" role="button" class="secondary-button"
+                  >Acheter un ticket</a
+                >
+              </div>
+            </div>
+            <!-- Bouton inactif vers la page d'expositions -->
+            <div class="d-flex bouton-exposition">
+              <a class="circle-button m-auto">Toutes les expositions</a>
+            </div>
+          </div>
+        </section>
+
+        <!-- Début de la section de la collection -->
+        <section data-scroll-container id="collection">
+          <!-- Début container -->
+          <div class="container">
+            <!-- Section de titre -->
+            <div class="h2">
+              <h2>Les collections privées</h2>
+              <hr />
+            </div>
+            <!-- Colonne d'items de la collection -->
+            <div class="row justify-content-center">
+              <!-- Item de la collection 4/12 sur écran large et 6/12 sur écran + petit -->
+              <div class="col-lg-4 col-md-6">
+                <div class="description-collection">
+                  <!-- Image et badge de l'item de la collection -->
+                  <figure>
+                    <img
+                      src="../medias/freyja/img/collection/hutnerston.jpg"
+                      alt="Broche viking d'hunterston"
+                      class="img"
+                    />
+                    <!-- Badge d'exclusivité de l'item -->
+                    <div class="info">
+                      <figure class="i">
+                        <i class="ri-fire-fill"></i>
+                      </figure>
+                      <span>Oeuvre unique au monde</span>
+                    </div>
+                  </figure>
+                  <!-- Titre et description de l'item de la collection -->
+                  <div class="content-box">
+                    <h4>Broche d'Hunterston</h4>
+                    <p>700 après notre ère</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Item de la collection 4/12 sur écran large et 6/12 sur écran + petit -->
+              <div class="col-lg-4 col-md-6" data-scroll data-scroll-speed="2">
+                <div class="description-collection">
+                  <!-- Image et badge de l'item de la collection -->
+                  <figure>
+                    <img
+                      src="../medias/freyja/img/collection/hiddensee.jpg"
+                      alt="Butin en or d'Hiddensee"
+                      class="img"
+                    />
+                    <!-- Badge d'exclusivité de l'item -->
+                    <div class="info">
+                      <figure class="i">
+                        <i class="ri-fire-fill"></i>
+                      </figure>
+                      <span>Oeuvre unique au monde</span>
+                    </div>
+                  </figure>
+                  <!-- Titre et description de l'item de la collection -->
+                  <div class="content-box">
+                    <h4>Butin en or d'Hiddensee</h4>
+                    <p>10e siècle après notre ère</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Item de la collection 4/12 sur écran large et 6/12 sur écran + petit -->
+              <div class="col-lg-4 col-md-6">
+                <div class="description-collection">
+                  <!-- Image et badge de l'item de la collection -->
+                  <figure>
+                    <img
+                      src="../medias/freyja/img/collection/winchester.jpg"
+                      alt="Manuscrit de Winchester"
+                      class="img"
+                    />
+                    <!-- Badge d'exclusivité de l'item -->
+                    <div class="info">
+                      <figure class="i">
+                        <i class="ri-fire-fill"></i>
+                      </figure>
+                      <span>Oeuvre unique au monde</span>
+                    </div>
+                  </figure>
+                  <!-- Titre et description de l'item de la collection -->
+                  <div class="content-box">
+                    <h4>Manuscrit de Winchester</h4>
+                    <p>1031 ans après notre ère</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Item de la collection 4/12 sur écran large et 6/12 sur écran + petit -->
+              <div class="col-lg-4 col-md-6">
+                <div class="description-collection">
+                  <!-- Image et badge de l'item de la collection -->
+                  <figure>
+                    <img
+                      src="../medias/freyja/img/collection/isimir.jpg"
+                      alt="Proue d'Isimir"
+                      class="img"
+                    />
+                  </figure>
+                  <!-- Titre et description de l'item de la collection -->
+                  <div class="content-box">
+                    <h4>Bout du bateau Isimir</h4>
+                    <p>1201 ans après notre ère</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Item de la collection 4/12 sur écran large et 6/12 sur écran + petit -->
+              <div class="col-lg-4 col-md-6" data-scroll data-scroll-speed="2">
+                <div class="description-collection">
+                  <!-- Image et badge de l'item de la collection -->
+                  <figure>
+                    <img
+                      src="../medias/freyja/img/collection/scottson.jpg"
+                      alt="Statue de scottson"
+                      class="img"
+                    />
+                  </figure>
+                  <!-- Titre et description de l'item de la collection -->
+                  <div class="content-box">
+                    <h4>Statue de Scottson</h4>
+                    <p>Reproduction (1080 ans après notre ère)</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Item de la collection 4/12 sur écran large et 6/12 sur écran + petit -->
+              <div class="col-lg-4 col-md-6">
+                <div class="description-collection">
+                  <!-- Image et badge de l'item de la collection -->
+                  <figure>
+                    <img
+                      src="../medias/freyja/img/collection/peinutrefroyja.jpg"
+                      alt="Peinture viking de Froyjsna"
+                      class="img"
+                    />
+                  </figure>
+                  <!-- Titre et description de l'item de la collection -->
+                  <div class="content-box">
+                    <h4>Peinture de Froyjsna</h4>
+                    <p>1300 ans après notre ère</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Début de la section de vidéo -->
+        <section id="section-video">
+          <!-- Div de vidéo -->
+          <div class="video-bg">
+            <video
+              src="../medias/freyja/video/freyja.mp4"
+              loop
+              autoplay
+              playsinline
+              muted
+            ></video>
+          </div>
+          <!-- Début container -->
+          <div class="container">
+            <!-- Contenu textuel de la section vidéo -->
+            <div class="contenu-video">
+              <!-- Sous-titre -->
+              <h6>VENEZ NOUS VOIR MAINTENANT ET PROFITEZ DU</h6>
+              <!-- Titre -->
+              <h2>Plus grand musée viking de France</h2>
+              <!-- Bouton vers la modale de réservation -->
+              <a href="#modal-2" role="button" class="secondary-button-white"
+                >Acheter un billet</a
+              >
+            </div>
+          </div>
+        </section>
+
+        <!-- Début de la section de carte & infos de contact -->
+        <section data-scroll-container id="contact" class="bg-white">
+          <!-- Début container -->
+          <div class="container">
+            <!-- Section de titre -->
+            <div class="h2">
+              <h2>Localisation & contact</h2>
+              <hr />
+            </div>
+            <div
+              class="d-lg-flex"
+              data-scroll
+              data-scroll-speed="1"
+              data-scroll-direction="horizontal"
+            >
+              <!-- Div de la map de largeur 7/12 pour écran large -->
+              <div class="col-lg-7">
+                <div id="map" class="map"></div>
+                <!-- Initialisation du script de l'API d'OpenStreetMap -->
+                <script>
+                  var map = new ol.Map({
+                    target: "map",
+                    layers: [
+                      new ol.layer.Tile({
+                        source: new ol.source.OSM(),
+                      }),
+                    ],
+                    view: new ol.View({
+                      center: ol.proj.fromLonLat([9.0965, 33.3734]),
+                      zoom: 10,
+                    }),
+                  });
+                </script>
+              </div>
+              <!-- Div des informations de contact de largeur 3/12, avec un écart de 1/12 pour écran large -->
+              <div class="offset-lg-1 col-lg-3 description-map">
+                <h3>Musée Toulonnais Viking de Freyja</h3>
+                <span
+                  ><i class="ri-map-pin-line pr-5"></i>12 rue du valhalla,
+                  <br />
+                  83000 Toulon, France</span
+                >
+                <br />
+                <span
+                  ><i class="ri-phone-line pr-5"></i>(+33) 6 51 56 05 35</span
+                >
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Début du footer  -->
+        <footer>
+          <!-- Début du container -->
+          <div class="container">
+            <div class="d-lg-flex">
+              <!-- Bloc avec le logo horizontal de longueur 3/12 -->
+              <div class="col-lg-3 d-lg-flex">
+                <img
+                  class="logo-footer"
+                  src="../medias/freyja/logos/logo_horizontal_blanc.svg"
+                  alt="Logo horizontal musée freyja"
+                />
+              </div>
+
+              <!-- Bloc des liens interne de longueur 3/12 -->
+              <div class="col-lg-3">
+                <h4>Menu</h4>
+                <ul>
+                  <li><a data-scroll-to href="#">Accueil</a></li>
+                  <li>
+                    <a data-scroll-to href="#collection">Collection privée</a>
+                  </li>
+                  <li><a data-scroll-to href="#exposition">Exposition</a></li>
+                  <li>
+                    <a data-scroll-to href="#collection">Collections privées</a>
+                  </li>
+                  <li>
+                    <a data-scroll-to href="#contact">Localisation & contact</a>
+                  </li>
+                </ul>
+              </div>
+              <!-- Bloc des liens des autres musées de longueur 3/12 -->
+              <div class="col-lg-3">
+                <h4>Les autres musées</h4>
+                <ul>
+                  <li><a href="../index.html">Musées de Toulon</a></li>
+                  <li>
+                    <a href="../musees/athor.html">Musée Egyptien d'Athor</a>
+                  </li>
+                  <li>
+                    <a href="../musees/freyja.html">Musée Viking de Freyja </a>
+                  </li>
+                  <li>
+                    <a href="../musees/edouard.html"
+                      >Musée du Moyen-Âge d'Edouard</a
+                    >
+                  </li>
+                </ul>
+              </div>
+              <!-- Bloc de rappel des informations + RSN de longueur 3/12 -->
+              <div class="col-lg-3">
+                <h4>Informations</h4>
+                <div class="description-map">
+                  <h5 class="m-0">Musée national égyptien d'freyja</h5>
+                  <span
+                    ><i class="ri-map-pin-line pr-5"></i>12 rue du valhalla,
+                    <br />
+                    83000 Toulon, France</span
+                  >
+                  <br />
+                  <span
+                    ><i class="ri-phone-line pr-5"></i>(+33) 6 51 56 05 35</span
+                  >
+                </div>
+                <div class="d-lg-flex rsn mt-5">
+                  <a href="" class="mr-20"><i class="ri-instagram-line"></i></a>
+                  <a href="" class="mx-20"><i class="ri-twitter-line"></i></a>
+                  <a href="" class="ml-10"><i class="ri-facebook-line"></i></a>
+                </div>
+              </div>
+            </div>
+            <!-- HR de séparation du footer / sous-footer -->
+            <hr class="my-20" />
+            <!-- Sous-footer -->
+            <div class="d-lg-flex">
+              <!-- Bloc de copyright de longueur 6/12 -->
+              <div class="col-lg-6">
+                <p>Projet fictif / scolaire - 2022</p>
+              </div>
+              <!-- Bloc d'auteur de longueur 6/12 -->
+              <div class="col-lg-6">
+                <p class="float-lg-right">
+                  Crée avec <i class="ri-heart-2-line"></i> par Guigue Julien
+                </p>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+    <script src="../js/halfmoon.min.js"></script>
+    <!--   Script du framework -->
+    <script src="../js/jquery.min.js"></script>
+    <!-- Jquery-->
+    <script src="../js/script.js"></script>
+    <!-- Script principal -->
+    <script src="../js/locomotive-scroll.min.js"></script>
+    <!-- Script principal -->
+    <script>
+      (function () {
+        var scroll = new LocomotiveScroll({
+          el: document.querySelector(".smooth-scroll"),
+          smooth: true,
+        });
+      })();
+    </script>
+  </body>
+</html>
